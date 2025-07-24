@@ -1,101 +1,104 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crypto Event Tracker</title>
+  <title>Duck's Daily Crypto Updates</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 font-sans">
-  <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold text-center mb-4">Crypto Market Event Tracker</h1>
+<body class="bg-gray-900 text-gray-100 font-sans">
+  <div class="container mx-auto p-4 sm:p-6">
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-center mb-6 text-yellow-400 animate-pulse">Duck's Daily Crypto Updates</h1>
     <div class="overflow-x-auto">
-      <table class="w-full text-sm text-left text-gray-700">
-        <thead class="text-xs uppercase bg-gray-200">
+      <table id="eventTable" class="w-full text-sm text-left text-gray-300">
+        <thead class="text-xs uppercase bg-gray-700">
           <tr>
-            <th class="px-4 py-2">Date</th>
-            <th class="px-4 py-2">Time (UTC)</th>
-            <th class="px-4 py-2">Asset</th>
-            <th class="px-4 py-2">Event</th>
-            <th class="px-4 py-2">Impact</th>
+            <th class="px-4 py-3">Date</th>
+            <th class="px-4 py-3">Time (UTC)</th>
+            <th class="px-4 py-3">Asset</th>
+            <th class="px-4 py-3">Event</th>
+            <th class="px-4 py-3">Impact</th>
           </tr>
         </thead>
-        <tbody>
-          <tr class="bg-white border-b">
-            <td class="px-4 py-2">Jul 25, 2025</td>
-            <td class="px-4 py-2">14:00</td>
-            <td class="px-4 py-2">BTC</td>
-            <td class="px-4 py-2">Bitcoin ETF Approval Decision</td>
-            <td class="px-4 py-2"><span class="text-red-600 font-bold">High</span></td>
+        <tbody id="eventBody">
+          <tr class="bg-gray-800 border-b border-gray-700 hover:bg-gray-600 transition">
+            <td class="px-4 py-3">Jul 25, 2025</td>
+            <td class="px-4 py-3">14:00</td>
+            <td class="px-4 py-3">All</td>
+            <td class="px-4 py-3">US Powell Speech</td>
+            <td class="px-4 py-3"><span class="font-bold text-red-400">High</span></td>
           </tr>
-          <tr class="bg-gray-50 border-b">
-            <td class="px-4 py-2">Jul 26, 2025</td>
-            <td class="px-4 py-2">09:00</td>
-            <td class="px-4 py-2">ETH</td>
-            <td class="px-4 py-2">Ethereum Network Upgrade</td>
-            <td class="px-4 py-2"><span class="text-yellow-600 font-bold">Medium</span></td>
+          <tr class="bg-gray-800 border-b border-gray-700 hover:bg-gray-600 transition">
+            <td class="px-4 py-3">Jul 28, 2025</td>
+            <td class="px-4 py-3">10:00</td>
+            <td class="px-4 py-3">All</td>
+            <td class="px-4 py-3">US JOLTS Job Openings</td>
+            <td class="px-4 py-3"><span class="font-bold text-yellow-400">Medium</span></td>
           </tr>
-          <tr class="bg-white border-b">
-            <td class="px-4 py-2">Jul 27, 2025</td>
-            <td class="px-4 py-2">16:00</td>
-            <td class="px-4 py-2">USDT</td>
-            <td class="px-4 py-2">Tether Transparency Report</td>
-            <td class="px-4 py-2"><span class="text-green-600 font-bold">Low</span></td>
+          <tr class="bg-gray-800 border-b border-gray-700 hover:bg-gray-600 transition">
+            <td class="px-4 py-3">Jul 30, 2025</td>
+            <td class="px-4 py-3">14:00</td>
+            <td class="px-4 py-3">All</td>
+            <td class="px-4 py-3">FOMC Rate Decision</td>
+            <td class="px-4 py-3"><span class="font-bold text-red-400">High</span></td>
           </tr>
-          <tr class="bg-gray-50">
-            <td class="px-4 py-2">Jul 28, 2025</td>
-            <td class="px-4 py-2">11:00</td>
-            <td class="px-4 py-2">XRP</td>
-            <td class="px-4 py-2">Ripple SEC Hearing</td>
-            <td class="px-4 py-2"><span class="text-red-600 font-bold">High</span></td>
+          <tr class="bg-gray-800 border-b border-gray-700 hover:bg-gray-600 transition">
+            <td class="px-4 py-3">Aug 2, 2025</td>
+            <td class="px-4 py-3">TBA</td>
+            <td class="px-4 py-3">SNX</td>
+            <td class="px-4 py-3">SNX Shutdown on Base</td>
+            <td class="px-4 py-3"><span class="font-bold text-yellow-400">Medium</span></td>
+          </tr>
+          <tr class="bg-gray-800 border-b border-gray-700 hover:bg-gray-600 transition">
+            <td class="px-4 py-3">Aug 5, 2025</td>
+            <td class="px-4 py-3">TBA</td>
+            <td class="px-4 py-3">STRK</td>
+            <td class="px-4 py-3">STRK Mainnet Upgrade</td>
+            <td class="px-4 py-3"><span class="font-bold text-yellow-400">Medium</span></td>
+          </tr>
+          <tr class="bg-gray-800 border-b border-gray-700 hover:bg-gray-600 transition">
+            <td class="px-4 py-3">Aug 10, 2025</td>
+            <td class="px-4 py-3">TBA</td>
+            <td class="px-4 py-3">All</td>
+            <td class="px-4 py-3">BRICS Summit Day 2</td>
+            <td class="px-4 py-3"><span class="font-bold text-red-400">High</span></td>
+          </tr>
+          <tr class="bg-gray-800 border-b border-gray-700 hover:bg-gray-600 transition">
+            <td class="px-4 py-3">Aug 15, 2025</td>
+            <td class="px-4 py-3">TBA</td>
+            <td class="px-4 py-3">All</td>
+            <td class="px-4 py-3">US Tariffs Pause Ends</td>
+            <td class="px-4 py-3"><span class="font-bold text-yellow-400">Medium</span></td>
+          </tr>
+          <tr class="bg-gray-800 border-b border-gray-700 hover:bg-gray-600 transition">
+            <td class="px-4 py-3">Aug 15, 2025</td>
+            <td class="px-4 py-3">TBA</td>
+            <td class="px-4 py-3">FTX</td>
+            <td class="px-4 py-3">FTX Recovery Trust Distribution Record Date</td>
+            <td class="px-4 py-3"><span class="font-bold text-yellow-400">Medium</span></td>
+          </tr>
+          <tr class="bg-gray-800 border-b border-gray-700 hover:bg-gray-600 transition">
+            <td class="px-4 py-3">Aug 20, 2025</td>
+            <td class="px-4 py-3">TBA</td>
+            <td class="px-4 py-3">AVAIL</td>
+            <td class="px-4 py-3">AVAIL $21M Token Unlock</td>
+            <td class="px-4 py-3"><span class="font-bold text-yellow-400">Medium</span></td>
+          </tr>
+          <tr class="bg-gray-800 border-b border-gray-700 hover:bg-gray-600 transition">
+            <td class="px-4 py-3">Aug 22, 2025</td>
+            <td class="px-4 py-3">10:00</td>
+            <td class="px-4 py-3">All</td>
+            <td class="px-4 py-3">US Flash Manufacturing PMI</td>
+            <td class="px-4 py-3"><span class="font-bold text-yellow-400">Medium</span></td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p class="text-center text-gray-600 mt-4">Data is for demonstration. Add API for live updates.</p>
+    <p class="text-center text-gray-400 mt-4">Static event data for Jul 25, 2025 - Aug 24, 2025. Provide API keys to enable live updates.</p>
   </div>
   <script>
-    // Placeholder for future dynamic updates
-    console.log("Crypto Event Tracker loaded. Add API integration for real-time data.");
+    // Placeholder for API integration
+    console.log("Duck's Daily Crypto Updates loaded. Add CoinGecko and CryptoCompare API keys for live data.");
   </script>
 </body>
 </html>
