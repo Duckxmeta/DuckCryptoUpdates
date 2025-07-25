@@ -4,126 +4,121 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Duck’s Crypto Updates | Just Duck It</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    /* Just Duck It Color Palette & Custom Styles */
     body {
-      font-family: 'Arial', sans-serif;
-      background-color: #1f2937;
-      color: #e5e7eb;
+      font-family: 'Inter', sans-serif;
+      background-color: #1a1a1a; /* Dark background */
+      color: #f5f5f5; /* Off-white text */
     }
-    h1, h2 {
-      font-family: 'Arial', sans-serif;
-      font-weight: bold;
-    }
-    .crypto-table, .events-table {
-      background: #374151;
-      border: 2px solid #facc15;
-      border-radius: 0.375rem;
+    .accent-bg { background-color: #FFD200; }
+    .accent-text { color: #FFD200; }
+    .accent-border { border-color: #FFD200; }
+    .dark-text { color: #1a1a1a; }
+
+    .data-table {
+      background: #2a2a2a;
+      border: 2px solid #FFD200;
+      border-radius: 0.5rem;
       padding: 0.5rem;
-      margin-top: 0.5rem;
+      margin-top: 1rem;
+      overflow-x: auto; /* Ensure table is scrollable on small screens */
     }
-    .crypto-table th, .crypto-table td, .events-table th, .events-table td {
-      padding: 0.5rem;
+    .data-table th, .data-table td {
+      padding: 0.75rem 1rem;
       text-align: left;
       font-size: 0.875rem;
+      white-space: nowrap;
     }
-    .crypto-table th, .events-table th {
-      color: #facc15;
-      font-weight: bold;
+    .data-table th {
+      color: #FFD200;
+      font-weight: 700;
     }
-    .crypto-table td, .events-table td {
-      color: #e5e7eb;
+    .data-table td {
+      color: #f5f5f5;
     }
-    .crypto-table tr.negative td {
-      color: #f87171;
+    .data-table tr.negative td {
+      color: #f87171; /* Red for negative */
     }
-    .crypto-table tr.positive td {
-      color: #4ade80;
+    .data-table tr.positive td {
+      color: #4ade80; /* Green for positive */
     }
-    .crypto-table tr:hover, .events-table tr:hover {
-      background: #4b5563;
+    .data-table tr:hover {
+      background: #3a3a3a;
     }
-    .events-table .impact-high {
-      color: #f87171;
-    }
-    .events-table .impact-medium {
-      color: #facc15;
-    }
-    .events-table .impact-low {
-      color: #4ade80;
-    }
+    .impact-high { color: #f87171; }
+    .impact-medium { color: #FFD200; }
+    .impact-low { color: #4ade80; }
+
     .chatbot input {
-      background-color: #4b5563;
-      color: #e5e7eb;
-      border: 1px solid #6b7280;
+      background-color: #333333;
+      color: #f5f5f5;
+      border: 1px solid #444444;
       border-radius: 0.375rem;
-      padding: 0.5rem;
+      padding: 0.75rem;
       font-size: 0.875rem;
+      transition: all 0.2s ease;
     }
     .chatbot input:focus {
       outline: none;
-      border-color: #facc15;
-      box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.3);
+      border-color: #FFD200;
+      box-shadow: 0 0 0 3px rgba(255, 210, 0, 0.3);
     }
     .chatbot button {
-      background-color: #facc15;
-      color: #1f2937;
+      background-color: #FFD200;
+      color: #1a1a1a;
       border: none;
       border-radius: 0.375rem;
-      padding: 0.5rem 1rem;
+      padding: 0.75rem 1.5rem;
       font-size: 0.875rem;
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 700;
       transition: background-color 0.3s ease;
     }
     .chatbot button:hover {
-      background-color: #eab308;
+      background-color: #e6b800; /* Darker yellow for hover */
     }
     .chatbot a {
-      color: #facc15;
+      color: #FFD200;
       text-decoration: underline;
+      font-weight: bold;
     }
     .chatbot a:hover {
-      color: #eab308;
+      color: #e6b800;
     }
-    .duck-animation {
-      transition: transform 0.3s ease;
-    }
-    .duck-animation:hover {
-      transform: scale(1.1);
-    }
-    .hero-gradient {
-      background-image: radial-gradient(circle at center, #1f2937 0%, #ca8a04 100%);
-    }
-    @media (max-width: 640px) {
-      .crypto-table th, .crypto-table td, .events-table th, .events-table td {
-        font-size: 0.75rem;
-        padding: 0.3rem;
-      }
-      .chatbot input, .chatbot button {
-        font-size: 0.75rem;
-        padding: 0.3rem;
-      }
+    #chatbot-response {
+        background-color: #2a2a2a;
+        padding: 1rem;
+        border-radius: 0.375rem;
+        border: 1px solid #444;
+        line-height: 1.6;
     }
   </style>
 </head>
-<body>
+<body class="antialiased">
+
   <!-- Header -->
-  <header class="bg-yellow-400 text-white py-6">
+  <header class="accent-bg dark-text py-4 shadow-lg">
     <div class="container mx-auto px-4 flex justify-between items-center">
-      <h1 class="text-3xl font-bold">Duck’s Crypto Updates</h1>
-      <a href="https://justduckit.org" class="text-white hover:text-gray-200">Back to Just Duck It</a>
+      <h1 class="text-2xl md:text-3xl font-bold">Duck’s Crypto Updates</h1>
+      <a href="https://justduckit.org" target="_blank" class="dark-text font-semibold hover:text-black transition-colors">Back to Just Duck It</a>
     </div>
   </header>
 
   <!-- Main Content -->
-  <section class="hero-gradient py-16 text-center">
+  <main class="py-12 md:py-16">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-4 text-gray-100">Crypto Market Updates</h2>
+
       <!-- Crypto Events Table -->
-      <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-100">Crypto Market Events</h2>
-      <p class="text-lg max-w-xl mx-auto mb-6 text-gray-200">Track key events impacting crypto markets!</p>
-      <div id="crypto-events" class="events-table mx-auto max-w-3xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-2 accent-text">Crypto Market Events</h2>
+        <p class="text-lg max-w-2xl mx-auto text-gray-300">Track key events impacting the crypto markets!</p>
+      </div>
+      <div id="crypto-events" class="data-table mx-auto max-w-4xl">
         <table class="w-full">
           <thead>
             <tr>
@@ -133,14 +128,17 @@
             </tr>
           </thead>
           <tbody id="events-table-body">
-            <tr><td colspan="3" class="text-center">Loading crypto events...</td></tr>
+            <tr><td colspan="3" class="text-center p-8">Loading crypto events...</td></tr>
           </tbody>
         </table>
       </div>
+
       <!-- Crypto Data Table -->
-      <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-100">Live Crypto Prices</h2>
-      <p class="text-lg max-w-xl mx-auto mb-6 text-gray-200">Check the latest prices and market trends for top cryptocurrencies!</p>
-      <div id="crypto-data" class="crypto-table mx-auto max-w-3xl">
+      <div class="text-center mt-16 mb-12">
+          <h2 class="text-3xl font-bold mb-2 accent-text">Live Crypto Prices</h2>
+          <p class="text-lg max-w-2xl mx-auto text-gray-300">Check the latest prices and trends for top cryptocurrencies!</p>
+      </div>
+      <div id="crypto-data" class="data-table mx-auto max-w-4xl">
         <table class="w-full">
           <thead>
             <tr>
@@ -150,259 +148,219 @@
             </tr>
           </thead>
           <tbody id="crypto-table-body">
-            <tr><td colspan="3" class="text-center">Loading crypto data...</td></tr>
+            <tr><td colspan="3" class="text-center p-8">Loading crypto data...</td></tr>
           </tbody>
         </table>
       </div>
+
       <!-- Chatbot -->
-      <div class="chatbot max-w-lg mx-auto mt-6">
-        <p class="text-sm text-gray-200 mb-2">Type /help for available commands</p>
-        <div id="chatbot-response" class="text-sm text-gray-200 mb-4 min-h-[2rem]"></div>
-        <div class="flex gap-2">
-          <input id="chatbot-input" type="text" placeholder="Ask about crypto (e.g., /info bitcoin or /info 3oqcUejEoAjGKcqBRs98XRmB4grsBk2rjjPZS7wEbonk)" class="w-full">
-          <button id="chatbot-send" class="font-bold">Ask</button>
+       <div class="text-center mt-16 mb-12">
+          <h2 class="text-3xl font-bold mb-2 accent-text">Crypto Chatbot</h2>
+          <p class="text-lg max-w-2xl mx-auto text-gray-300">Ask for info about any coin by name or contract address.</p>
+      </div>
+      <div class="chatbot max-w-2xl mx-auto mt-6">
+        <div id="chatbot-response" class="text-md mb-4 min-h-[6rem] flex items-center justify-center text-gray-400">
+            Type /help for available commands.
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <input id="chatbot-input" type="text" placeholder="e.g., /info solana or /info 0x..." class="w-full">
+          <button id="chatbot-send">Ask</button>
         </div>
       </div>
     </div>
-  </section>
+  </main>
 
   <!-- Footer -->
-  <footer class="bg-yellow-400 text-white py-4 text-center">
-    <p>© 2025 Just Duck It. All rights reserved.</p>
+  <footer class="accent-bg dark-text py-4 text-center mt-16">
+    <p class="font-semibold">© 2025 Just Duck It. All rights reserved.</p>
   </footer>
 
-  <!-- JavaScript for CoinGecko API, CoinMarketCap API, Events, and Chatbot -->
+  <!-- JavaScript Logic -->
   <script>
-    // Fetch crypto data from CoinGecko for the table
-    let cryptoData = [];
+    // --- DATA FETCHING ---
+
+    // Fetch crypto data from CoinGecko for the main table
     async function fetchCryptoData() {
+      // IMPORTANT: Replace with your own free CoinGecko API key
       const apiKey = 'CG-pkfUFyKVDwwGJtoRuzj4XPMo';
       const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,binancecoin,solana,ripple&order=market_cap_desc&per_page=5&page=1&sparkline=false';
+      const tableBody = document.getElementById('crypto-table-body');
       try {
-        const response = await fetch(url, {
-          headers: {
-            'Authorization': `Bearer ${apiKey}`
-          }
-        });
-        if (!response.ok) throw new Error('API request failed');
-        cryptoData = await response.json();
-        const tableBody = document.getElementById('crypto-table-body');
-        tableBody.innerHTML = '';
+        const response = await fetch(url, { headers: { 'Authorization': `Bearer ${apiKey}` } });
+        if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
+        const cryptoData = await response.json();
+        tableBody.innerHTML = ''; // Clear loading message
         cryptoData.forEach(coin => {
           const row = document.createElement('tr');
           row.className = coin.price_change_percentage_24h >= 0 ? 'positive' : 'negative';
           row.innerHTML = `
-            <td>${coin.name}</td>
-            <td>$${coin.current_price.toFixed(2)}</td>
+            <td class="font-bold">${coin.name}</td>
+            <td>$${coin.current_price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
             <td>${coin.price_change_percentage_24h.toFixed(2)}%</td>
           `;
           tableBody.appendChild(row);
         });
       } catch (error) {
         console.error('Error fetching crypto data:', error);
-        document.getElementById('crypto-table-body').innerHTML = `
-          <tr><td colspan="3" class="text-center">Quack! Data unavailable, try again soon.</td></tr>
-        `;
+        tableBody.innerHTML = `<tr><td colspan="3" class="text-center p-8 text-red-400">Quack! Data unavailable. Please try again soon.</td></tr>`;
       }
     }
 
-    // Populate crypto events (static example data)
+    // Populate crypto events (using relevant dates for July 2025)
     function populateCryptoEvents() {
       const events = [
-        { date: '2025-07-14', name: 'CLARITY Act Debate', impact: 'High', description: 'US Congress debates crypto regulations.' },
-        { date: '2025-07-15', name: 'GENIUS Act Hearing', impact: 'High', description: 'Stablecoin regulation bill discussion.' },
-        { date: '2025-07-16', name: 'Anti-CBDC Act Vote', impact: 'Medium', description: 'Vote on blocking US digital dollar.' },
-        { date: '2025-07-20', name: 'Federal Reserve Rate Decision', impact: 'High', description: 'Potential impact on crypto prices.' },
-        { date: '2025-07-22', name: 'Ethereum Network Upgrade', impact: 'Medium', description: 'Scheduled blockchain improvement.' }
+        { date: '2025-07-28', name: 'Federal Reserve Rate Decision', impact: 'High' },
+        { date: '2025-07-30', name: 'Ethereum Network Upgrade "Pectra"', impact: 'Medium' },
+        { date: '2025-08-05', name: 'US CPI Data Release', impact: 'High' },
+        { date: '2025-08-12', name: 'Solana Breakpoint Conference', impact: 'Medium' },
+        { date: '2025-08-15', name: 'Crypto Regulation Bill Hearing', impact: 'Low' }
       ];
       const tableBody = document.getElementById('events-table-body');
-      tableBody.innerHTML = '';
-      if (events.length > 0) {
-        events.forEach(event => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${event.date}</td>
-            <td>${event.name}</td>
-            <td class="impact-${event.impact.toLowerCase()}">${event.impact}</td>
-          `;
-          tableBody.appendChild(row);
-        });
-      } else {
-        tableBody.innerHTML = `
-          <tr><td colspan="3" class="text-center">Quack! No events available, check back soon.</td></tr>
+      tableBody.innerHTML = ''; // Clear loading message
+      events.forEach(event => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${event.date}</td>
+          <td>${event.name}</td>
+          <td class="impact-${event.impact.toLowerCase()} font-bold">${event.impact}</td>
         `;
-      }
+        tableBody.appendChild(row);
+      });
     }
 
-    // Chatbot logic with CoinMarketCap API
+    // --- CHATBOT LOGIC ---
     async function handleChatbotQuery() {
-      const input = document.getElementById('chatbot-input').value.toLowerCase().trim();
+      const input = document.getElementById('chatbot-input').value.trim();
       const responseDiv = document.getElementById('chatbot-response');
-      responseDiv.innerHTML = '';
+      
+      if (!input) return;
 
-      if (!input) {
-        responseDiv.innerHTML = 'Quack! Please enter a query.';
-        return;
-      }
+      responseDiv.innerHTML = '<div class="text-gray-400">Quack! Fetching data...</div>';
 
       // Handle /help command
-      if (input === '/help') {
+      if (input.toLowerCase() === '/help') {
         responseDiv.innerHTML = `
-          <strong>Available Commands:</strong><br>
-          • /info [coin or contract address] - Get coin info: price, market cap, 24h change, contract address, age (e.g., /info bitcoin or /info 3oqcUejEoAjGKcqBRs98XRmB4grsBk2rjjPZS7wEbonk)<br>
-          Try coins: bitcoin, ethereum, bnb, solana, ripple, or any valid contract address
+          <div class="text-left">
+            <strong class="accent-text">Available Commands:</strong><br>
+            <ul class="list-disc list-inside mt-2">
+              <li><strong>/info [coin name or contract address]</strong><br>Get a coin's ticker, market cap, and a link to its chart.</li>
+            </ul>
+            <p class="mt-2 text-sm text-gray-400">e.g., /info solana OR /info mpoxP5wyoR3eRW8L9bZjGPFtCsmX8WcqU5BHxFW1xkn</p>
+          </div>
         `;
         document.getElementById('chatbot-input').value = '';
         return;
       }
 
-      // Supported blockchain platforms
+      let command, param;
+      if (input.toLowerCase().startsWith('/info ')) {
+        command = '/info';
+        param = input.substring(5).trim();
+      } else {
+        responseDiv.innerHTML = '<div class="text-red-400">Quack! Invalid command. Try /help for available commands.</div>';
+        document.getElementById('chatbot-input').value = '';
+        return;
+      }
+
+      // --- Coin Lookup Logic ---
+      // IMPORTANT: Replace with your own free CoinMarketCap API key
+      const cmcApiKey = '82a43fd4-88c5-434c-be76-c2d12f97c764'; 
       const platforms = [
-        { id: 'solana', name: 'Solana', addressRegex: /^[1-9A-HJ-NP-Za-km-z]{42,44}$/ },
-        { id: 'ethereum', name: 'Ethereum', addressRegex: /^0x[a-fA-F0-9]{40}$/ },
-        { id: 'binance-smart-chain', name: 'BNB Chain', addressRegex: /^0x[a-fA-F0-9]{40}$/ }
+        { id: 'solana', name: 'Solana', addressRegex: /^[1-9A-HJ-NP-Za-km-z]{32,44}$/, explorer: 'https://dexscreener.com/solana/' },
+        { id: 'ethereum', name: 'Ethereum', addressRegex: /^0x[a-fA-F0-9]{40}$/, explorer: 'https://dexscreener.com/ethereum/' },
+        { id: 'binance-smart-chain', name: 'BNB Chain', addressRegex: /^0x[a-fA-F0-9]{40}$/, explorer: 'https://dexscreener.com/bsc/' }
       ];
-
-      // Regex for API key-like input (UUID format)
-      const apiKeyRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-
-      // Hardcoded coins for quick name-based lookups
-      const coins = {
-        'bitcoin': { id: '1', slug: 'bitcoin', symbol: 'BTC', contract: 'N/A' },
-        'ethereum': { id: '1027', slug: 'ethereum', symbol: 'ETH', contract: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2' },
-        'bnb': { id: '1839', slug: 'binance-coin', symbol: 'BNB', contract: '0xB8c77482e45F1F44dE1745F52C74426C631bDD52' },
-        'solana': { id: '5426', slug: 'solana', symbol: 'SOL', contract: 'N/A' },
-        'ripple': { id: '52', slug: 'xrp', symbol: 'XRP', contract: 'N/A' },
-        'bonk': { id: '23095', slug: 'bonk', symbol: 'BONK', contract: '3oqcUejEoAjGKcqBRs98XRmB4grsBk2rjjPZS7wEbonk' }
+      const hardcodedCoins = {
+        'bitcoin': { id: '1', slug: 'bitcoin' },
+        'ethereum': { id: '1027', slug: 'ethereum' },
+        'solana': { id: '5426', slug: 'solana' },
+        'xrp': { id: '52', slug: 'xrp'},
+        'bnb': { id: '1839', slug: 'bnb'}
       };
 
-      let coinId = null;
-      let slug = null;
-      let symbol = null;
-      let command = null;
-      let contractAddress = null;
-      let platformId = null;
+      let coinId = null, slug = null, contractAddress = null, explorerUrl = null;
 
-      // Parse command and parameter
-      if (input.startsWith('/')) {
-        const [cmd, param] = input.split(' ');
-        if (cmd === '/price' || cmd === '/change' || cmd === '/info') {
-          command = cmd;
-          if (param) {
-            // Check if param looks like an API key
-            if (apiKeyRegex.test(param)) {
-              responseDiv.innerHTML = 'Quack! This looks like an API key, not a contract address. Please use a valid contract address (e.g., 3oqcUejEoAjGKcqBRs98XRmB4grsBk2rjjPZS7wEbonk).';
-              document.getElementById('chatbot-input').value = '';
-              return;
-            }
-            // Check if param is a contract address
-            for (const platform of platforms) {
-              if (platform.addressRegex.test(param)) {
-                contractAddress = param;
-                platformId = platform.id;
-                break;
-              }
-            }
-            // If not a contract address, check if it's a coin name or symbol
-            if (!contractAddress) {
-              for (const [name, data] of Object.entries(coins)) {
-                if (param.includes(name) || param === data.symbol.toLowerCase()) {
-                  coinId = data.id;
-                  slug = data.slug;
-                  symbol = data.symbol;
-                  contractAddress = data.contract;
-                  break;
-                }
-              }
-            }
-          }
-        }
-      } else {
-        // Support natural language
-        for (const [name, data] of Object.entries(coins)) {
-          if (input.includes(name) || input.includes(data.symbol.toLowerCase())) {
-            coinId = data.id;
-            slug = data.slug;
-            symbol = data.symbol;
-            contractAddress = data.contract;
-            command = input.includes('price') ? '/price' : input.includes('change') ? '/change' : input.includes('info') ? '/info' : null;
-            break;
-          }
+      // Check if param is a contract address
+      for (const platform of platforms) {
+        if (platform.addressRegex.test(param)) {
+          contractAddress = param;
+          explorerUrl = platform.explorer + contractAddress;
+          break;
         }
       }
-
-      const cmcApiKey = '82a43fd4-88c5-434c-be76-c2d12f97c764';
-
-      // Handle contract address lookup
-      if (contractAddress && !coinId && platformId) {
-        try {
-          const response = await fetch(`https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?CMC_PRO_API_KEY=${cmcApiKey}&contract_address=${contractAddress}&platform=${platformId}`);
-          if (response.ok) {
-            const data = await response.json();
-            if (data.data && data.data.length > 0) {
-              coinId = data.data[0].id.toString();
-              slug = data.data[0].slug;
-              symbol = data.data[0].symbol;
-            } else {
-              responseDiv.innerHTML = 'Quack! Invalid or unsupported contract address.';
-              document.getElementById('chatbot-input').value = '';
-              return;
-            }
-          } else {
-            responseDiv.innerHTML = 'Quack! Error fetching contract data, try again soon.';
-            document.getElementById('chatbot-input').value = '';
-            return;
-          }
-        } catch (error) {
-          console.error('Error fetching contract data:', error);
-          responseDiv.innerHTML = 'Quack! Error fetching contract data, try again soon.';
-          document.getElementById('chatbot-input').value = '';
-          return;
+      
+      try {
+        let fetchUrl;
+        if (contractAddress) {
+          // Fetch by contract address using CMC's metadata endpoint
+          fetchUrl = `https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?address=${contractAddress}`;
+        } else if (hardcodedCoins[param.toLowerCase()]) {
+          // Fetch by known coin slug
+          const coinData = hardcodedCoins[param.toLowerCase()];
+          coinId = coinData.id;
+          slug = coinData.slug;
+          fetchUrl = `https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?id=${coinId}`;
+        } else {
+            // Fallback for any other symbol/name
+            fetchUrl = `https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=${param.toUpperCase()}`;
         }
-      }
 
-      if (coinId && (command === '/price' || command === '/change' || command === '/info')) {
-        try {
-          const response = await fetch(`https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?id=${coinId}&CMC_PRO_API_KEY=${cmcApiKey}`);
-          if (!response.ok) throw new Error('API request failed');
-          const data = await response.json();
-          const coin = data.data[coinId];
-          const coinMarketCapLink = `<a href="https://coinmarketcap.com/currencies/${slug}/" target="_blank">View chart on CoinMarketCap</a>`;
-          if (command === '/price') {
-            responseDiv.innerHTML = `${coin.name} price: $${coin.quote.USD.price.toFixed(6)}<br>${coinMarketCapLink}`;
-          } else if (command === '/change') {
-            responseDiv.innerHTML = `${coin.name} 24h change: ${coin.quote.USD.percent_change_24h.toFixed(2)}%<br>${coinMarketCapLink}`;
-          } else if (command === '/info') {
-            const contract = contractAddress || coins[Object.keys(coins).find(key => coins[key].id === coinId)]?.contract || 'N/A';
-            const coinAge = coin.date_added ? `Since ${new Date(coin.date_added).toLocaleDateString()}` : 'Not available via API';
-            responseDiv.innerHTML = `
-              <strong>${coin.name} (${coin.symbol}) Info:</strong><br>
-              Price: $${coin.quote.USD.price.toFixed(6)}<br>
-              Market Cap: $${coin.quote.USD.market_cap.toLocaleString()}<br>
-              24h Change: ${coin.quote.USD.percent_change_24h.toFixed(2)}%<br>
-              Contract Address: ${contract}<br>
-              Coin Age: ${coinAge}<br>
-              ${coinMarketCapLink}
-            `;
-          }
-        } catch (error) {
-          console.error('Error fetching coin info:', error);
-          responseDiv.innerHTML = 'Quack! Data unavailable for this coin.';
+        const response = await fetch(fetchUrl, { headers: { 'X-CMC_PRO_API_KEY': cmcApiKey } });
+        if (!response.ok) throw new Error(`CoinMarketCap API Error: ${response.statusText}`);
+        const result = await response.json();
+
+        let coinData;
+        if (contractAddress) {
+            // For contract addresses, the data is nested differently
+            const key = Object.keys(result.data)[0];
+            coinData = result.data[key];
+            // Now we need a second fetch for the quote data
+            const quoteResponse = await fetch(`https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?id=${coinData.id}`, { headers: { 'X-CMC_PRO_API_KEY': cmcApiKey } });
+            const quoteResult = await quoteResponse.json();
+            coinData.quote = quoteResult.data[coinData.id].quote;
+        } else if (coinId) {
+             coinData = result.data[coinId];
+        } else {
+            const key = Object.keys(result.data)[0];
+            coinData = result.data[key][0]; // When fetching by symbol, it's in an array
         }
-      } else {
-        responseDiv.innerHTML = 'Quack! Try /help for available commands or ask about Bitcoin, Ethereum, etc. (e.g., /info bitcoin or /info 3oqcUejEoAjGKcqBRs98XRmB4grsBk2rjjPZS7wEbonk).';
-      }
 
-      document.getElementById('chatbot-input').value = '';
+        if (!coinData) throw new Error("Coin data not found in API response.");
+
+        const marketCap = coinData.quote.USD.market_cap;
+        const viewLinkUrl = explorerUrl || `https://coinmarketcap.com/currencies/${coinData.slug}/`;
+        const linkText = explorerUrl ? 'View on DexScreener' : 'View on CoinMarketCap';
+
+        responseDiv.innerHTML = `
+          <div class="text-left">
+            <strong class="text-xl accent-text">${coinData.name} (${coinData.symbol})</strong><br>
+            <div class="mt-2">
+                <strong>Market Cap:</strong> $${marketCap ? marketCap.toLocaleString('en-US', {maximumFractionDigits: 0}) : 'N/A'}<br>
+                <a href="${viewLinkUrl}" target="_blank">${linkText}</a>
+            </div>
+          </div>
+        `;
+
+      } catch (error) {
+        console.error("Chatbot Error:", error);
+        responseDiv.innerHTML = `<div class="text-red-400">Quack! Couldn't find data. Check the coin name or contract address. It might be too new or on an unsupported chain.</div>`;
+      } finally {
+        document.getElementById('chatbot-input').value = '';
+      }
     }
 
-    // Initialize
+    // --- INITIALIZATION ---
     document.addEventListener('DOMContentLoaded', () => {
+      // Initial data fetch
       fetchCryptoData();
       populateCryptoEvents();
+
+      // Event listeners for chatbot
       document.getElementById('chatbot-send').addEventListener('click', handleChatbotQuery);
       document.getElementById('chatbot-input').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleChatbotQuery();
+        if (e.key === 'Enter') {
+          handleChatbotQuery();
+        }
       });
     });
   </script>
