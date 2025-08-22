@@ -1,308 +1,1146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Duck’s Crypto Updates | Just Duck It</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* Just Duck It Color Palette & Custom Styles */
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #1a1a1a; /* Dark background */
-      color: #f5f5f5; /* Off-white text */
-    }
-    .accent-bg { background-color: #FFD200; }
-    .accent-text { color: #FFD200; }
-    .accent-border { border-color: #FFD200; }
-    .dark-text { color: #1a1a1a; }
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WM5MPDK7WE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-WM5MPDK7WE');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just Duck It - A New Era</title>
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="JustDuckIt - A New Era">
+    <meta property="og:description" content="JustDuckIt saves ducks in Tennessee. We're building a community around this mission using modern web and blockchain technology. Join our flock!">
+    <meta property="og:image" content="https://i.imgur.com/otNEI2M.png">
+    <meta property="og:url" content="https://justduckit.org">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://i.imgur.com/otNEI2M.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Styles */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: #ffffff;
+        }
 
-    .data-table {
-      background: #2a2a2a;
-      border: 2px solid #FFD200;
-      border-radius: 0.5rem;
-      padding: 0.5rem;
-      margin-top: 1rem;
-      overflow-x: auto; /* Ensure table is scrollable on small screens */
-    }
-    .data-table th, .data-table td {
-      padding: 0.75rem 1rem;
-      text-align: left;
-      font-size: 0.875rem;
-      white-space: nowrap;
-    }
-    .data-table th {
-      color: #FFD200;
-      font-weight: 700;
-    }
-    .data-table td {
-      color: #f5f5f5;
-    }
-    .data-table tr.negative td {
-      color: #f87171; /* Red for negative */
-    }
-    .data-table tr.positive td {
-      color: #4ade80; /* Green for positive */
-    }
-    .data-table tr:hover {
-      background: #3a3a3a;
-    }
-    .impact-high { color: #f87171; }
-    .impact-medium { color: #FFD200; }
-    .impact-low { color: #4ade80; }
+        /* Video Background */
+        .hero-video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+        }
+        #hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
 
-    .chatbot input {
-      background-color: #333333;
-      color: #f5f5f5;
-      border: 1px solid #444444;
-      border-radius: 0.375rem;
-      padding: 0.75rem;
-      font-size: 0.875rem;
-      transition: all 0.2s ease;
-    }
-    .chatbot input:focus {
-      outline: none;
-      border-color: #FFD200;
-      box-shadow: 0 0 0 3px rgba(255, 210, 0, 0.3);
-    }
-    .chatbot button {
-      background-color: #FFD200;
-      color: #1a1a1a;
-      border: none;
-      border-radius: 0.375rem;
-      padding: 0.75rem 1.5rem;
-      font-size: 0.875rem;
-      cursor: pointer;
-      font-weight: 700;
-      transition: background-color 0.3s ease;
-    }
-    .chatbot button:hover {
-      background-color: #e6b800; /* Darker yellow for hover */
-    }
-    .chatbot a {
-      color: #FFD200;
-      text-decoration: underline;
-      font-weight: bold;
-    }
-    .chatbot a:hover {
-      color: #e6b800;
-    }
-    #chatbot-response {
-        background-color: #2a2a2a;
-        padding: 1rem;
-        border-radius: 0.375rem;
-        border: 1px solid #444;
-        line-height: 1.6;
-        white-space: pre-wrap; /* Allows text to wrap naturally */
-    }
-  </style>
+        /* Header & Navigation */
+        .site-header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            transition: background-color 0.3s ease;
+        }
+        .site-header.scrolled {
+            background-color: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Full-Screen Menu */
+        #menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        #menu-overlay nav a {
+            color: #a0a0a0;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem; /* 40px */
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: block;
+            margin: 1rem 0;
+        }
+        #menu-overlay nav a:hover {
+            color: #ffd700;
+            transform: translateX(10px);
+        }
+
+        /* Hamburger Menu Button */
+        .hamburger-btn {
+            z-index: 999;
+        }
+        .hamburger-line {
+            transition: all 0.3s ease-in-out;
+        }
+        .hamburger-btn.active .hamburger-line:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .hamburger-btn.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-btn.active .hamburger-line:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+        
+        /* Gold Accent & Buttons */
+        .text-gold {
+            color: #ffd700;
+        }
+        .border-gold {
+            border-color: #ffd700;
+        }
+        .btn-primary {
+            display: inline-block;
+            border: 2px solid #ffd700;
+            color: #ffd700;
+            padding: 12px 32px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            background-color: #ffd700;
+            color: #0a0a0a;
+        }
+
+        /* Section Styling */
+        .section-title {
+            font-size: 3rem; /* 48px */
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 4.5rem; /* 72px */
+            }
+        }
+        .section-subtitle {
+            font-size: 1.25rem; /* 20px */
+            color: #a0a0a0;
+            max-width: 600px;
+            margin: 1rem auto 0;
+        }
+        
+        /* Project/Merch Card */
+        .content-card {
+            background-color: #1a1a1a;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .content-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .card-image {
+            transition: transform 0.4s ease;
+        }
+        .content-card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        /* Horizontal Scroll Gallery */
+        .scroll-gallery {
+            display: flex;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+        }
+        .scroll-gallery::-webkit-scrollbar {
+            display: none; /* Safari and Chrome */
+        }
+        .gallery-item {
+            flex: 0 0 80vw;
+            max-width: 400px;
+            margin-right: 20px;
+        }
+        .gallery-item img, .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Fade-in Animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Crypto Updates Section Styles */
+        .data-table {
+          background: #2a2a2a;
+          border: 2px solid #ffd700;
+          border-radius: 0.5rem;
+          padding: 0.5rem;
+          margin-top: 1rem;
+          overflow-x: auto;
+        }
+        .data-table th, .data-table td {
+          padding: 0.75rem 1rem;
+          text-align: left;
+          font-size: 0.875rem;
+          white-space: nowrap;
+        }
+        .data-table th {
+          color: #ffd700;
+          font-weight: 700;
+        }
+        .data-table td {
+          color: #f5f5f5;
+        }
+        .data-table tr.negative td {
+          color: #f87171;
+        }
+        .data-table tr.positive td {
+          color: #4ade80;
+        }
+        .data-table tr:hover {
+          background: #3a3a3a;
+        }
+        .impact-high { color: #f87171; }
+        .impact-medium { color: #ffd700; }
+        .impact-low { color: #f87171; }
+
+        .crypto-chatbot input {
+          background-color: #333333;
+          color: #f5f5f5;
+          border: 1px solid #444444;
+          border-radius: 0.375rem;
+          padding: 0.75rem;
+          font-size: 0.875rem;
+          transition: all 0.2s ease;
+        }
+        .crypto-chatbot input:focus {
+          outline: none;
+          border-color: #ffd700;
+          box-shadow: 0 0 0 3px rgba(255, 210, 0, 0.3);
+        }
+        .crypto-chatbot button {
+          background-color: #ffd700;
+          color: #1a1a1a;
+          border: none;
+          border-radius: 0.375rem;
+          padding: 0.75rem 1.5rem;
+          font-size: 0.875rem;
+          cursor: pointer;
+          font-weight: 700;
+          transition: background-color 0.3s ease;
+        }
+        .crypto-chatbot button:hover {
+          background-color: #e6b800;
+        }
+        #crypto-chatbot-response {
+            background-color: #2a2a2a;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            border: 1px solid #444;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        /* --- QUACKBOT CHATBOT STYLES --- */
+        #chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        #chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            background: #ffd700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        #chatbot-toggle:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        #chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            max-width: 90vw;
+            height: 500px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        #chat-window.active {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .chat-header {
+            padding: 16px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header h3 {
+            font-size: 20px;
+            color: #ffd700;
+        }
+        #chat-close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        #chat-close-btn:hover {
+            opacity: 1;
+        }
+        #chat-messages {
+            flex-grow: 1;
+            padding: 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        #chat-messages::-webkit-scrollbar { width: 6px; }
+        #chat-messages::-webkit-scrollbar-track { background: transparent; }
+        #chat-messages::-webkit-scrollbar-thumb { background: rgba(255, 215, 0, 0.5); border-radius: 3px; }
+        .chat-message {
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+            line-height: 1.5;
+        }
+        .user-message {
+            background: #ffd700;
+            color: #0a0a0a;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        .bot-message {
+            background: #2a2a2a;
+            color: #e0e0e0;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        .bot-typing {
+            align-self: flex-start;
+            display: flex;
+            gap: 4px;
+            padding: 12px 15px;
+        }
+        .bot-typing span {
+            width: 8px;
+            height: 8px;
+            background-color: rgba(255, 215, 0, 0.6);
+            border-radius: 50%;
+            animation: typing-bubble 1.2s infinite ease-in-out;
+        }
+        .bot-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .bot-typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing-bubble {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1.0); }
+        }
+        .chat-input-area {
+            padding: 16px;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            display: flex;
+            gap: 10px;
+        }
+        #chat-input {
+            flex-grow: 1;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid #444;
+            border-radius: 50px;
+            padding: 10px 18px;
+            color: white;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        #chat-input:focus {
+            border-color: #ffd700;
+        }
+        #chat-send-btn {
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+            background: #ffd700;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        #chat-send-btn:hover {
+            transform: scale(1.1);
+        }
+
+    </style>
 </head>
 <body class="antialiased">
 
-  <!-- Header -->
-  <header class="accent-bg dark-text py-4 shadow-lg">
-    <div class="container mx-auto px-4 flex justify-between items-center">
-      <h1 class="text-2xl md:text-3xl font-bold">Duck’s Crypto Updates</h1>
-      <a href="https://justduckit.org" target="_blank" class="dark-text font-semibold hover:text-black transition-colors">Back to Just Duck It</a>
+    <!-- Top Banner -->
+    <div class="bg-[#ffd700] text-black text-center py-2 font-semibold text-sm uppercase tracking-wider">
+        888 Decentralized Ducks powered by Solana
     </div>
-  </header>
 
-  <!-- Main Content -->
-  <main class="py-12 md:py-16">
-    <div class="container mx-auto px-4">
-
-      <!-- Crypto Events Table -->
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold mb-2 accent-text">Crypto Market Events</h2>
-        <p class="text-lg max-w-2xl mx-auto text-gray-300">Track key events impacting the crypto markets!</p>
-      </div>
-      <div id="crypto-events" class="data-table mx-auto max-w-4xl">
-        <table class="w-full">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Event</th>
-              <th>Impact</th>
-            </tr>
-          </thead>
-          <tbody id="events-table-body">
-            <tr><td colspan="3" class="text-center p-8">Loading crypto events...</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Crypto Data Table -->
-      <div class="text-center mt-16 mb-12">
-          <h2 class="text-3xl font-bold mb-2 accent-text">Live Crypto Prices</h2>
-          <p class="text-lg max-w-2xl mx-auto text-gray-300">Check the latest prices and trends for top cryptocurrencies!</p>
-      </div>
-      <div id="crypto-data" class="data-table mx-auto max-w-4xl">
-        <table class="w-full">
-          <thead>
-            <tr>
-              <th>Coin</th>
-              <th>Price (USD)</th>
-              <th>24h Change</th>
-            </tr>
-          </thead>
-          <tbody id="crypto-table-body">
-            <tr><td colspan="3" class="text-center p-8">Loading crypto data...</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Chatbot -->
-       <div class="text-center mt-16 mb-12">
-          <h2 class="text-3xl font-bold mb-2 accent-text">Crypto AI Chatbot</h2>
-          <p class="text-lg max-w-2xl mx-auto text-gray-300">Ask me anything about cryptocurrency!</p>
-      </div>
-      <div class="chatbot max-w-2xl mx-auto mt-6">
-        <div id="chatbot-response" class="text-md mb-4 min-h-[6rem] flex items-center justify-center text-gray-400">
-            Ask a question to get started. For a list of commands, type /help.
-        </div>
-        <div class="flex flex-col sm:flex-row gap-2">
-          <input id="chatbot-input" type="text" placeholder="e.g., Explain what a blockchain is" class="w-full">
-          <button id="chatbot-send">Ask</button>
-        </div>
-      </div>
+    <!-- Video Background -->
+    <div class="hero-video-container">
+        <video autoplay loop muted playsinline id="hero-video" poster="https://i.imgur.com/puY6hwJ.jpeg">
+            <source src="https://i.imgur.com/5yRqKas.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
     </div>
-  </main>
 
-  <!-- Footer -->
-  <footer class="accent-bg dark-text py-4 text-center mt-16">
-    <p class="font-semibold">© 2025 Just Duck It. All rights reserved.</p>
-  </footer>
+    <!-- Header -->
+    <header class="site-header p-4 md:p-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="z-50">
+                <img src="https://i.imgur.com/otNEI2M.png" alt="Just Duck It Logo" class="w-12 h-12 rounded-full" onerror="this.src='https://placehold.co/48x48/0a0a0a/FFD700?text=JDI';">
+            </a>
+            <button id="menu-toggle" class="hamburger-btn space-y-1.5 p-2 z-50">
+                <span class="hamburger-line block w-6 h-0.5 bg-white"></span>
+                <span class="hamburger-line block w-6 h-0.5 bg-white"></span>
+                <span class="hamburger-line block w-6 h-0.5 bg-white"></span>
+            </button>
+        </div>
+    </header>
 
-  <!-- JavaScript Logic -->
-  <script>
-    // --- DATA FETCHING (for tables) ---
+    <!-- Full-Screen Menu Overlay -->
+    <div id="menu-overlay">
+        <nav class="text-center">
+            <a href="#mission" class="menu-link">Our Mission</a>
+            <a href="#web3-explainer" class="menu-link">What is Web3?</a>
+            <a href="#flock" class="menu-link">The Flock</a>
+            <a href="#projects" class="menu-link">Projects</a>
+            <a href="#duckonomics" class="menu-link">Duckonomics</a>
+            <a href="#merch" class="menu-link">Merch</a>
+            <a href="#community" class="menu-link">Community</a>
+            <a href="#collective-movement" class="menu-link">Art Collective</a>
+            <a href="#contact" class="menu-link">Contact</a>
+        </nav>
+    </div>
 
-    async function fetchCryptoData() {
-      const apiKey = 'CG-pkfUFyKVDwwGJtoRuzj4XPMo';
-      const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,binancecoin,solana,ripple&order=market_cap_desc&per_page=5&page=1&sparkline=false';
-      const tableBody = document.getElementById('crypto-table-body');
-      try {
-        const response = await fetch(url, { headers: { 'Authorization': `Bearer ${apiKey}` } });
-        if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
-        const cryptoData = await response.json();
-        tableBody.innerHTML = '';
-        cryptoData.forEach(coin => {
-          const row = document.createElement('tr');
-          row.className = coin.price_change_percentage_24h >= 0 ? 'positive' : 'negative';
-          row.innerHTML = `
-            <td class="font-bold">${coin.name}</td>
-            <td>$${coin.current_price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-            <td>${coin.price_change_percentage_24h.toFixed(2)}%</td>
-          `;
-          tableBody.appendChild(row);
-        });
-      } catch (error) {
-        console.error('Error fetching crypto data:', error);
-        tableBody.innerHTML = `<tr><td colspan="3" class="text-center p-8 text-red-400">Quack! Data unavailable. Please try again soon.</td></tr>`;
-      }
-    }
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="h-screen flex items-center justify-center text-center p-4 relative">
+            <div class="relative z-10">
+                <h1 class="text-5xl md:text-8xl font-black text-white leading-tight" style="text-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+                    Just Duck It
+                </h1>
+                <p class="mt-4 text-lg md:text-xl max-w-2xl mx-auto text-gray-300">
+                    A Tennessee bird sanctuary building a new kind of community.
+                </p>
+                <div class="mt-8">
+                    <a href="#mission" class="btn-primary">Discover Our Mission</a>
+                </div>
+            </div>
+        </section>
 
-    function populateCryptoEvents() {
-      const events = [
-        { date: '2025-07-28', name: 'Federal Reserve Rate Decision', impact: 'High' },
-        { date: '2025-07-30', name: 'Ethereum Network Upgrade "Pectra"', impact: 'Medium' },
-        { date: '2025-08-05', name: 'US CPI Data Release', impact: 'High' },
-        { date: '2025-08-12', name: 'Solana Breakpoint Conference', impact: 'Medium' },
-        { date: '2025-08-15', name: 'Crypto Regulation Bill Hearing', impact: 'Low' }
-      ];
-      const tableBody = document.getElementById('events-table-body');
-      tableBody.innerHTML = '';
-      events.forEach(event => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${event.date}</td>
-          <td>${event.name}</td>
-          <td class="impact-${event.impact.toLowerCase()} font-bold">${event.impact}</td>
-        `;
-        tableBody.appendChild(row);
-      });
-    }
-
-    // --- GEMINI AI CHATBOT LOGIC ---
-    async function handleChatbotQuery() {
-      const input = document.getElementById('chatbot-input').value.trim();
-      const responseDiv = document.getElementById('chatbot-response');
-      
-      if (!input) return;
-
-      responseDiv.innerHTML = '<div class="text-gray-400">Quack! The AI is thinking...</div>';
-      document.getElementById('chatbot-input').value = '';
-
-      // Handle local /help command
-      if (input.toLowerCase() === '/help') {
-        responseDiv.innerHTML = `
-          <div class="text-left">
-            <strong class="accent-text">Hello! I'm a crypto AI assistant.</strong><br>
-            <p class="mt-2">You can ask me anything about cryptocurrency, blockchain, NFTs, and more. Just type your question and I'll do my best to answer.</p>
-            <p class="mt-2 text-sm text-gray-400">Example: "What is the difference between Bitcoin and Ethereum?"</p>
-          </div>
-        `;
-        return;
-      }
-
-      // --- Call Gemini API ---
-      const GEMINI_API_KEY = 'AIzaSyCFzQEefz1PLz9RgzOWt-tmuCJwPwQu-Mw';
-      const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
-      
-      const payload = {
-        contents: [{
-          parts: [{
-            // We give the model a "role" to get better, more focused answers
-            text: `You are a helpful, friendly, and knowledgeable cryptocurrency assistant named DuckBot. Explain things clearly and concisely. Answer the following user query: "${input}"`
-          }]
-        }]
-      };
-
-      try {
-        const response = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        if (!response.ok) {
-          throw new Error(`API request failed with status ${response.status}. Check your API key and network connection.`);
-        }
-
-        const result = await response.json();
+        <!-- Mission Section -->
+        <section id="mission" class="py-20 md:py-32 fade-in-section">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="section-title">A Sanctuary, <span class="text-gold">Reimagined</span>.</h2>
+                <p class="section-subtitle">
+                   We merge our real-life bird sanctuary with Web3 technology to create a transparent, engaging, and exclusive experience for our community. Your support is directly and provably linked to our mission of saving birds.
+                </p>
+                <div class="mt-12">
+                     <a href="https://launchmynft.io/collections/BcFk6iremDyoZvrFChHdLdeXV4kcoCYsDX5nXfiXRA7H/fbcixvFFo1WFKNUnazYj" target="_blank" class="btn-primary text-lg">
+                        Mint Your Duck
+                    </a>
+                </div>
+            </div>
+        </section>
         
-        if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts[0].text) {
-          const text = result.candidates[0].content.parts[0].text;
-          responseDiv.innerHTML = `<div class="text-left">${text}</div>`;
-        } else {
-          // Handle cases where the response might be blocked or empty
-          let errorMessage = "Received an empty or invalid response from the API.";
-          if (result.promptFeedback && result.promptFeedback.blockReason) {
-              errorMessage = `Request was blocked. Reason: ${result.promptFeedback.blockReason}. Please adjust your query.`;
-          }
-          throw new Error(errorMessage);
-        }
+        <!-- GIF Divider Section -->
+        <section id="gif-divider" class="py-16 md:py-20 fade-in-section">
+            <div class="container mx-auto px-4 text-center">
+                <img src="https://i.imgur.com/asxD27p.gif" alt="Just Duck It Community GIF" class="mx-auto max-w-lg w-full rounded-lg shadow-lg">
+            </div>
+        </section>
 
-      } catch (error) {
-        console.error("Chatbot Error:", error);
-        responseDiv.innerHTML = `<div class="text-red-400">Quack! An error occurred. ${error.message}</div>`;
-      }
-    }
+        <!-- Web3 Explainer Section -->
+        <section id="web3-explainer" class="py-20 md:py-32 bg-[#111] fade-in-section">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="section-title">New to Web3? <span class="text-gold">No Worries.</span></h2>
+                <p class="section-subtitle">
+                    Here’s a simple breakdown of the technology powering our community.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto mt-16 text-left">
+                    <div>
+                        <h3 class="text-3xl font-bold mb-4 text-gold">What's a Blockchain?</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Imagine a **digital receipt book** that's shared and verified by a huge community of computers. Every time something happens, a new receipt is added. Because everyone has a copy, it's practically impossible to cheat, making it super secure. That's the blockchain!
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold mb-4 text-gold">What's an NFT?</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            An NFT is like a **unique, digital certificate of ownership** recorded in that shared receipt book. It proves you own the original version of a digital item, like your one-of-a-kind Decent Duck, and gives you access to our community.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    // --- INITIALIZATION ---
+        <!-- Our Flock Section -->
+        <section id="flock" class="py-20 md:py-32 fade-in-section">
+            <div class="container mx-auto px-4">
+                <h2 class="section-title text-center mb-12">Meet Our Flock</h2>
+                <div class="scroll-gallery">
+                    <div class="gallery-item"><img src="https://i.imgur.com/puY6hwJ.jpeg" alt="Rescued bird 1" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/xDtlHp2.jpeg" alt="Rescued bird 2" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/UFqLyjX.jpeg" alt="Rescued bird 3" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/nSFnPRi.jpeg" alt="Rescued bird 4" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/cVPK557.jpeg" alt="Rescued bird 5" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/Z0SjtYK.jpeg" alt="Rescued bird 6" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/4JjvsZJ.jpeg" alt="Rescued bird 7" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/CLD4H11.jpeg" alt="Rescued bird 8" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/Zj9vBvE.jpeg" alt="Rescued bird 9" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/uDodScy.jpeg" alt="Rescued bird 10" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/Ikai49o.jpeg" alt="Rescued bird 11" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/3JWIdgd.jpeg" alt="Rescued bird 12" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/f6JHZAZ.jpeg" alt="Rescued bird 13" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/u1imbPy.jpeg" alt="Rescued bird 14" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/RzR8Swn.jpeg" alt="Rescued bird 15" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/6xgDSoD.jpeg" alt="Rescued bird 16" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/CgXDM7n.jpeg" alt="Rescued bird 17" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/osg6DVb.jpeg" alt="Rescued bird 18" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/IWXDsZa.jpeg" alt="Rescued bird 19" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/k3Rduas.jpeg" alt="Rescued bird 20" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/4xFPsoA.jpeg" alt="Rescued bird 21" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/hO4vfzL.jpeg" alt="Rescued bird 22" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/Xtj3MUW.jpeg" alt="Rescued bird 23" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/Wo89RgC.jpeg" alt="Rescued bird 24" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/RqOd3Ac.jpeg" alt="Rescued bird 25" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/It4saKp.jpeg" alt="Rescued bird 26" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                    <div class="gallery-item"><img src="https://i.imgur.com/2I2BIOq.jpeg" alt="Rescued bird 27" onerror="this.src='https://placehold.co/400x500/111111/e0e0e0?text=Bird';"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 md:py-32 bg-[#111] fade-in-section">
+            <div class="container mx-auto px-4">
+                <h2 class="section-title text-center mb-12">Our Digital <span class="text-gold">Ecosystem</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project Card -->
+                    <div class="content-card">
+                        <img src="https://i.imgur.com/a6IBrAV.jpg" alt="Duck Joyride" class="w-full h-56 object-cover card-image" onerror="this.src='https://placehold.co/600x400/1a1a1a/e0e0e0?text=Duck+Joyride';">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2">Duck Joyride</h3>
+                            <p class="text-gray-400 mb-6">An adventurous side-scroller. Guide a duck through wild obstacles.</p>
+                            <a href="https://duckxmeta.github.io/DuckJoyrideV2/" target="_blank" class="font-bold text-gold hover:underline">Play Now &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Project Card: X Page -->
+                    <div class="content-card">
+                        <img src="https://i.imgur.com/o32AjZE.jpg" alt="Duck on X" class="w-full h-56 object-cover card-image" onerror="this.src='https://placehold.co/600x400/1a1a1a/e0e0e0?text=X';">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2">🦆 on 𝕏</h3>
+                            <p class="text-gray-400 mb-6">Join @Ducksonx for fun, support our duck sanctuary, and connect.</p>
+                            <a href="https://x.com/ducksonx?s=21" target="_blank" class="font-bold text-gold hover:underline">Join on X &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Project Card -->
+                    <div class="content-card">
+                        <img src="https://i.imgur.com/EE0FRWy.jpg" alt="Duck on TikTok" class="w-full h-56 object-cover card-image" onerror="this.src='https://placehold.co/600x400/1a1a1a/e0e0e0?text=TikTok';">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2">JustDuckIt on TikTok</h3>
+                            <p class="text-gray-400 mb-6">Follow our daily sanctuary antics and join our 11K+ followers.</p>
+                            <a href="https://www.tiktok.com/@justtduckit" target="_blank" class="font-bold text-gold hover:underline">Follow Us &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Project Card -->
+                    <div class="content-card">
+                        <img src="https://i.imgur.com/Sq4XHVl.jpg" alt="AI Pioneer Program" class="w-full h-56 object-cover card-image" onerror="this.src='https://placehold.co/600x400/1a1a1a/e0e0e0?text=AI+Pioneers';">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2">AI Pioneer Program</h3>
+                            <p class="text-gray-400 mb-6">Join our global community to learn real-world skills in AI and blockchain.</p>
+                            <a href="https://zenai.world" target="_blank" class="font-bold text-gold hover:underline">Join Now &rarr;</a>
+                        </div>
+                    </div>
+                     <!-- Project Card -->
+                    <div class="content-card">
+                        <img src="https://i.imgur.com/KMnME5E.png" alt="Zen Arena" class="w-full h-56 object-cover card-image" onerror="this.src='https://placehold.co/600x400/1a1a1a/e0e0e0?text=Zen+Arena';">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2">Zen Arena</h3>
+                            <p class="text-gray-400 mb-6">Test the world's best AI models all in one place. Discover the future of artificial intelligence.</p>
+                            <a href="https://us.zenai.biz" target="_blank" class="font-bold text-gold hover:underline">Explore Arena &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Duckonomics Section -->
+        <section id="duckonomics" class="py-20 md:py-32 fade-in-section">
+            <div class="container mx-auto px-4">
+                <h2 class="section-title text-center mb-4">Duck<span class="text-gold">onomics</span></h2>
+                <p class="section-subtitle text-center mb-12">
+                    Stay updated with the latest crypto events, prices, and AI-powered insights.
+                </p>
+
+                <!-- Crypto Events Table -->
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl font-bold mb-2 text-gold">Crypto Market Events</h3>
+                    <p class="text-lg max-w-2xl mx-auto text-gray-300">Track key events impacting the crypto markets!</p>
+                </div>
+                <div id="crypto-events" class="data-table mx-auto max-w-4xl">
+                    <table class="w-full">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Event</th>
+                                <th>Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody id="events-table-body">
+                            <tr><td colspan="3" class="text-center p-8">Loading crypto events...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Crypto Data Table -->
+                <div class="text-center mt-16 mb-12">
+                    <h3 class="text-3xl font-bold mb-2 text-gold">Live Crypto Prices</h3>
+                    <p class="text-lg max-w-2xl mx-auto text-gray-300">Check the latest prices and trends for top cryptocurrencies!</p>
+                </div>
+                <div id="crypto-data" class="data-table mx-auto max-w-4xl">
+                    <table class="w-full">
+                        <thead>
+                            <tr>
+                                <th>Coin</th>
+                                <th>Price (USD)</th>
+                                <th>24h Change</th>
+                            </tr>
+                        </thead>
+                        <tbody id="crypto-table-body">
+                            <tr><td colspan="3" class="text-center p-8">Loading crypto data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Crypto Chatbot -->
+                <div class="text-center mt-16 mb-12">
+                    <h3 class="text-3xl font-bold mb-2 text-gold">Crypto AI Chatbot</h3>
+                    <p class="text-lg max-w-2xl mx-auto text-gray-300">Ask me anything about cryptocurrency!</p>
+                </div>
+                <div class="crypto-chatbot max-w-2xl mx-auto mt-6">
+                    <div id="crypto-chatbot-response" class="text-md mb-4 min-h-[6rem] flex items-center justify-center text-gray-400">
+                        Ask a question to get started. For a list of commands, type /help.
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <input id="crypto-chatbot-input" type="text" placeholder="e.g., Explain what a blockchain is" class="w-full">
+                        <button id="crypto-chatbot-send">Ask</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Merch Section -->
+        <section id="merch" class="py-20 md:py-32 bg-[#111] fade-in-section">
+            <div class="container mx-auto px-4">
+                <h2 class="section-title text-center">Wear The <span class="text-gold">Cause</span>.</h2>
+                <p class="section-subtitle text-center">
+                    Support the sanctuary and look good doing it. High-quality apparel powered by Printful.
+                </p>
+                <div class="mt-12 text-center">
+                    <a href="https://duckxmeta.github.io/Decentralized-Merch/" target="_blank" class="btn-primary text-lg">Shop The Collection</a>
+                </div>
+                <div class="mt-12 scroll-gallery">
+                    <div class="gallery-item">
+                        <img src="https://i.imgur.com/U9e6xWi.jpeg" alt="JustDuckit Merch 1" class="w-full h-full object-cover rounded-lg" onerror="this.onerror=null;this.src='https://placehold.co/400x500/1a1a1a/FFD700?text=Merch';">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.imgur.com/xTIWyEx.jpeg" alt="JustDuckit Merch 2" class="w-full h-full object-cover rounded-lg" onerror="this.onerror=null;this.src='https://placehold.co/400x500/1a1a1a/FFD700?text=Merch';">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.imgur.com/BHp79S5.jpeg" alt="JustDuckit Merch 3" class="w-full h-full object-cover rounded-lg" onerror="this.onerror=null;this.src='https://placehold.co/400x500/1a1a1a/FFD700?text=Merch';">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.imgur.com/AVxgVeR.jpeg" alt="JustDuckit Merch 4" class="w-full h-full object-cover rounded-lg" onerror="this.onerror=null;this.src='https://placehold.co/400x500/1a1a1a/FFD700?text=Merch';">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section id="community" class="py-20 md:py-32 fade-in-section">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="section-title">Join The <span class="text-gold">Flock</span>.</h2>
+                <p class="section-subtitle">
+                    Connect with us, get real-time updates, and unlock exclusive perks for Decent Duck holders in our Discord community.
+                </p>
+                <div class="mt-12">
+                    <a href="https://discord.com/invite/e6b4RnXRkE" target="_blank" class="btn-primary text-lg">Join Our Discord</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Collective Movement Section -->
+        <section id="collective-movement" class="py-20 md:py-32 bg-[#111] fade-in-section">
+            <div class="container mx-auto px-4">
+                <h2 class="section-title text-center mb-4">Collective <span class="text-gold">Movement</span></h2>
+                <p class="section-subtitle text-center mb-12">
+                    Showcasing the incredible creativity of our community members.
+                </p>
+                <div class="scroll-gallery">
+                    <div class="gallery-item">
+                        <div class="content-card h-full">
+                            <img src="https://i.imgur.com/u34c7jq.jpeg" alt="3D Duck Giveaway" class="w-full h-80 object-cover card-image" style="object-position: center 20%;" onerror="this.src='https://placehold.co/600x600/1a1a1a/ffd700?text=Art';">
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold mb-1">3D Duck Giveaway</h3>
+                                <p class="text-gray-400">by Cavan</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="content-card h-full">
+                            <img src="https://i.imgur.com/ivwS5Jx.jpeg" alt="Decentralized Ducks Flyer" class="w-full h-80 object-cover card-image" onerror="this.src='https://placehold.co/600x600/1a1a1a/ffd700?text=Art';">
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold mb-1">Decentralized Ducks Flyer</h3>
+                                <p class="text-gray-400">by Henry</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="content-card h-full">
+                            <img src="https://i.imgur.com/smbiwp8.jpeg" alt="Save Ducks" class="w-full h-80 object-cover card-image" onerror="this.src='https://placehold.co/600x600/1a1a1a/ffd700?text=Art';">
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold mb-1">Save Ducks</h3>
+                                <p class="text-gray-400">by Tokyo</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="content-card h-full">
+                            <img src="https://i.imgur.com/JOJITsH.jpeg" alt="Save Ducks" class="w-full h-80 object-cover card-image" onerror="this.src='https://placehold.co/600x600/1a1a1a/ffd700?text=Art';">
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold mb-1">Save Ducks</h3>
+                                <p class="text-gray-400">by Tokyo</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="content-card h-full">
+                           <video id="skater-duck-video" loop muted playsinline poster="https://i.imgur.com/UOnHket.jpeg" class="w-full h-80 object-cover card-image">
+                                <source src="https://i.imgur.com/UOnHket.mp4" type="video/mp4">
+                            </video>
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold mb-1">Skater Duck</h3>
+                                <p class="text-gray-400">by Bradkat</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-16 border-t border-gray-800">
+        <div class="container mx-auto px-4 text-center">
+            <img src="https://i.imgur.com/otNEI2M.png" alt="Just Duck It Logo" class="w-16 h-16 rounded-full mx-auto mb-6" onerror="this.src='https://placehold.co/64x64/0a0a0a/FFD700?text=JDI';">
+            <h4 class="text-3xl md:text-4xl font-bold">Get in Touch</h4>
+            <p class="text-gray-400 mt-2 mb-8">The best way to reach us is through our social channels.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="https://x.com/ducksonx?s=21" target="_blank" class="text-gray-400 hover:text-gold transition-colors">Twitter / X</a>
+                <a href="https://www.tiktok.com/@justtduckit" target="_blank" class="text-gray-400 hover:text-gold transition-colors">TikTok</a>
+                <a href="https://www.instagram.com/duckxmeta?igsh=MWlqa3F1dGc1d24wdg%3D%3D&utm_source=qr" target="_blank" class="text-gray-400 hover:text-gold transition-colors">Instagram</a>
+            </div>
+            <div class="mt-12 text-sm text-gray-600">
+                <p>&copy; 2025 Just Duck It. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- QUACKBOT CHATBOT HTML -->
+    <div id="chatbot-container">
+        <div id="chat-window">
+            <div class="chat-header">
+                <h3>QuackBot</h3>
+                <button id="chat-close-btn">&times;</button>
+            </div>
+            <div id="chat-messages">
+               <div class="chat-message bot-message">
+                 Quack! Welcome to the pond. Curious about the tech behind our ducks? Try asking me: "explain what are NFTs"
+               </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Ask a duck...">
+                <button id="chat-send-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+            </div>
+        </div>
+        <div id="chatbot-toggle">
+            <span>🦆</span>
+        </div>
+    </div>
+
+
+    <script>
     document.addEventListener('DOMContentLoaded', () => {
-      fetchCryptoData();
-      populateCryptoEvents();
-      document.getElementById('chatbot-send').addEventListener('click', handleChatbotQuery);
-      document.getElementById('chatbot-input').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          handleChatbotQuery();
+        
+        // --- Header Scroll Effect ---
+        const header = document.querySelector('.site-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // --- Full-Screen Menu Toggle ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const menuLinks = document.querySelectorAll('.menu-link');
+
+        const toggleMenu = () => {
+            menuToggle.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            document.body.style.overflow = menuOverlay.classList.contains('active') ? 'hidden' : '';
+        };
+
+        menuToggle.addEventListener('click', toggleMenu);
+        menuLinks.forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
+
+        // --- Fade-in on Scroll Animation ---
+        const sections = document.querySelectorAll('.fade-in-section');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+        
+        // --- Autoplay Video on Scroll ---
+        const skaterVideo = document.getElementById('skater-duck-video');
+        if (skaterVideo) {
+            const videoObserverOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5 // Start playing when 50% of the video is visible
+            };
+
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const playPromise = skaterVideo.play();
+                        if (playPromise !== undefined) {
+                            playPromise.catch(error => {
+                                console.log("Video autoplay prevented:", error);
+                            });
+                        }
+                    } else {
+                        skaterVideo.pause();
+                    }
+                });
+            }, videoObserverOptions);
+
+            videoObserver.observe(skaterVideo);
         }
-      });
+
+        // --- Crypto Data Logic ---
+        async function fetchCryptoData() {
+            const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,binancecoin,solana,ripple&order=market_cap_desc&per_page=5&page=1&sparkline=false';
+            const tableBody = document.getElementById('crypto-table-body');
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
+                const cryptoData = await response.json();
+                tableBody.innerHTML = '';
+                cryptoData.forEach(coin => {
+                    const row = document.createElement('tr');
+                    row.className = coin.price_change_percentage_24h >= 0 ? 'positive' : 'negative';
+                    row.innerHTML = `
+                        <td class="font-bold">${coin.name}</td>
+                        <td>$${coin.current_price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                        <td>${coin.price_change_percentage_24h.toFixed(2)}%</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching crypto data:', error);
+                tableBody.innerHTML = `<tr><td colspan="3" class="text-center p-8 text-red-400">Quack! Data unavailable. Please try again soon.</td></tr>`;
+            }
+        }
+
+        function populateCryptoEvents() {
+            const events = [
+                { date: '2025-08-28', name: 'US GDP Growth Rate Report', impact: 'High' },
+                { date: '2025-09-02', name: 'Cardano Network Upgrade "Voltaire"', impact: 'Medium' },
+                { date: '2025-09-10', name: 'US Inflation Rate Data', impact: 'High' },
+                { date: '2025-09-15', name: 'Avalanche Summit', impact: 'Medium' },
+                { date: '2025-09-22', name: 'SEC Decision on Spot Bitcoin ETF', impact: 'High' }
+            ];
+            const tableBody = document.getElementById('events-table-body');
+            tableBody.innerHTML = '';
+            events.forEach(event => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${event.date}</td>
+                    <td>${event.name}</td>
+                    <td class="impact-${event.impact.toLowerCase()} font-bold">${event.impact}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // --- Crypto Chatbot Logic ---
+        async function handleChatbotQuery() {
+            const input = document.getElementById('crypto-chatbot-input').value.trim();
+            const responseDiv = document.getElementById('crypto-chatbot-response');
+            
+            if (!input) return;
+
+            responseDiv.innerHTML = '<div class="text-gray-400">Quack! The AI is thinking...</div>';
+            document.getElementById('crypto-chatbot-input').value = '';
+
+            if (input.toLowerCase() === '/help') {
+                responseDiv.innerHTML = `
+                <div class="text-left">
+                    <strong class="text-gold">Hello! I'm a crypto AI assistant.</strong><br>
+                    <p class="mt-2">You can ask me anything about cryptocurrency, blockchain, NFTs, and more. Just type your question and I'll do my best to answer.</p>
+                    <p class="mt-2 text-sm text-gray-400">Example: "What is the difference between Bitcoin and Ethereum?"</p>
+                </div>
+                `;
+                return;
+            }
+
+            const GEMINI_API_KEY = 'AIzaSyCFzQEefz1PLz9RgzOWt-tmuCJwPwQu-Mw';
+            const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
+            
+            const payload = {
+                contents: [{
+                    parts: [{
+                        text: `You are a helpful, friendly, and knowledgeable cryptocurrency assistant named DuckBot. Explain things clearly and concisely. Answer the following user query: "${input}"`
+                    }]
+                }]
+            };
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API request failed with status ${response.status}. Check your API key and network connection.`);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts[0].text) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    responseDiv.innerHTML = `<div class="text-left">${text}</div>`;
+                } else {
+                    let errorMessage = "Received an empty or invalid response from the API.";
+                    if (result.promptFeedback && result.promptFeedback.blockReason) {
+                        errorMessage = `Request was blocked. Reason: ${result.promptFeedback.blockReason}. Please adjust your query.`;
+                    }
+                    throw new Error(errorMessage);
+                }
+
+            } catch (error) {
+                console.error("Chatbot Error:", error);
+                responseDiv.innerHTML = `<div class="text-red-400">Quack! An error occurred. ${error.message}</div>`;
+            }
+        }
+        
+        // Initial data fetch for crypto section
+        fetchCryptoData();
+        populateCryptoEvents();
+        document.getElementById('crypto-chatbot-send').addEventListener('click', handleChatbotQuery);
+        document.getElementById('crypto-chatbot-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleChatbotQuery();
+            }
+        });
+
+        // --- QuackBot Logic ---
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatWindow = document.getElementById('chat-window');
+        const closeBtn = document.getElementById('chat-close-btn');
+        const sendBtn = document.getElementById('chat-send-btn');
+        const chatInput = document.getElementById('chat-input');
+        const messagesContainer = document.getElementById('chat-messages');
+        
+        const QUACKBOT_API_KEY = 'AIzaSyCFzQEefz1PLz9RgzOWt-tmuCJwPwQu-Mw';
+        const QUACKBOT_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${QUACKBOT_API_KEY}`;
+        let chatHistory = [];
+
+        chatbotToggle.addEventListener('click', () => { chatWindow.classList.toggle('active'); });
+        closeBtn.addEventListener('click', () => { chatWindow.classList.remove('active'); });
+        sendBtn.addEventListener('click', sendQuackBotMessage);
+        chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); sendQuackBotMessage(); } });
+
+        function sendQuackBotMessage() {
+            const userInput = chatInput.value.trim();
+            if (userInput === '') return;
+            addQuackBotMessage(userInput, 'user');
+            chatInput.value = '';
+            showQuackBotTypingIndicator();
+            getQuackBotResponse(userInput);
+        }
+
+        function addQuackBotMessage(text, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('chat-message', `${sender}-message`);
+            messageElement.textContent = text;
+            messagesContainer.appendChild(messageElement);
+            scrollToQuackBotBottom();
+        }
+
+        function showQuackBotTypingIndicator() {
+            const typingElement = document.createElement('div');
+            typingElement.classList.add('bot-typing');
+            typingElement.id = 'typing-indicator';
+            typingElement.innerHTML = `<span></span><span></span><span></span>`;
+            messagesContainer.appendChild(typingElement);
+            scrollToQuackBotBottom();
+        }
+
+        function removeQuackBotTypingIndicator() {
+            const typingElement = document.getElementById('typing-indicator');
+            if (typingElement) {
+                typingElement.remove();
+            }
+        }
+
+        function scrollToQuackBotBottom() {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        async function getQuackBotResponse(userInput) {
+            const systemPrompt = "You are QuackBot, a sophisticated and friendly duck who is an expert on the 'Just Duck It' brand, luxury, and Web3. Your personality is charming and a little bit sassy. You end most of your sentences with a fun duck-related word or sound, like 'quack!', 'waddle on', or 'splash!'. Keep your answers helpful but also entertaining. Do not mention that you are an AI or language model. You are a duck.";
+            chatHistory.push({ role: "user", parts: [{ text: userInput }] });
+            const payload = {
+                contents: [{ role: "model", parts: [{ text: systemPrompt }] }, ...chatHistory]
+            };
+
+            try {
+                const response = await fetch(QUACKBOT_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) {
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+                const data = await response.json();
+                removeQuackBotTypingIndicator();
+                if (data.candidates && data.candidates.length > 0) {
+                    const botResponse = data.candidates[0].content.parts[0].text;
+                    addQuackBotMessage(botResponse, 'bot');
+                    chatHistory.push({ role: "model", parts: [{ text: botResponse }] });
+                } else {
+                    addQuackBotMessage("This ducky is a bit puzzled right now. Try again later, quack!", 'bot');
+                }
+            } catch (error) {
+                console.error("Error fetching bot response:", error);
+                removeQuackBotTypingIndicator();
+                addMessage("Oh no, my pond seems to have lost connection! Please try again in a bit. Waddle on.", 'bot');
+            }
+        }
+
     });
-  </script>
+    </script>
+
 </body>
 </html>
